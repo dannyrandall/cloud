@@ -21,3 +21,7 @@ provider "kubernetes" {
     digitalocean_kubernetes_cluster.default_prd.kube_config[0].cluster_ca_certificate
   )
 }
+
+module "nginx_ingress_controller" {
+  source = "../kubernetes-nginx-ingress-controller"
+}
