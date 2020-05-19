@@ -24,4 +24,13 @@ provider "kubernetes" {
 
 module "nginx_ingress_controller" {
   source = "../kubernetes-nginx-ingress-controller"
+
+  lb_annotations = {
+    "service.beta.kubernetes.io/do-loadbalancer-protocol"               = "tcp"
+    "service.beta.kubernetes.io/do-loadbalancer-algorithm"              = "round_robin"
+    "service.beta.kubernetes.io/do-loadbalancer-tls-ports"              = "443"
+    "service.beta.kubernetes.io/do-loadbalancer-certificate-id"         = digitalocean_certificate.cert.id
+    "service.beta.kubernetes.io/do-loadbalancer-redirect-http-to-https" = "true"
+    "service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol"  = "true"
+  }
 }

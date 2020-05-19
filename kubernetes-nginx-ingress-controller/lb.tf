@@ -9,7 +9,7 @@ resource "kubernetes_service" "lb" {
       "app.kubernetes.io/managed-by" = "terraform"
     }
 
-    annotations = {}
+    annotations = merge(var.lb_annotations, {})
   }
 
   spec {

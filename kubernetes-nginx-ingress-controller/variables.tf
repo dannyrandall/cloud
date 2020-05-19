@@ -3,3 +3,9 @@ variable "nginx_ingress_controller_version" {
   type        = string
   default     = "0.29.0"
 }
+
+variable "lb_annotations" {
+  description = "Annotations to add to the kubernetes load balancer resource."
+  type        = map(string)
+  default     = {}
+}
