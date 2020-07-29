@@ -1,3 +1,4 @@
+/*
 resource "digitalocean_kubernetes_cluster" "default_prd" {
   name     = "k8s-default-cluster-prd"
   region   = "sfo2"
@@ -26,11 +27,14 @@ module "nginx_ingress_controller" {
   source = "../kubernetes-nginx-ingress-controller"
 
   lb_annotations = {
+    "service.beta.kubernetes.io/do-loadbalancer-name"                   = "lb-k8s-cluster-default-prd"
     "service.beta.kubernetes.io/do-loadbalancer-protocol"               = "tcp"
     "service.beta.kubernetes.io/do-loadbalancer-algorithm"              = "round_robin"
-    "service.beta.kubernetes.io/do-loadbalancer-tls-ports"              = "443"
-    "service.beta.kubernetes.io/do-loadbalancer-certificate-id"         = digitalocean_certificate.cert.id
-    "service.beta.kubernetes.io/do-loadbalancer-redirect-http-to-https" = "true"
+    "service.beta.kubernetes.io/do-loadbalancer-redirect-http-to-https" = "false"
     "service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol"  = "true"
+    // "service.beta.kubernetes.io/do-loadbalancer-enable-backend-keepalive" = "true"
+    // "service.beta.kubernetes.io/do-loadbalancer-tls-ports"                = "443"
+    // "service.beta.kubernetes.io/do-loadbalancer-certificate-id"         = digitalocean_certificate.cert.id
   }
 }
+*/
